@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "esnext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["node", "jest"] // ✅ Add this
+  },
+  "include": ["src", "**/*.test.ts"], // ✅ Include test files
+  "exclude": ["node_modules"]         // ✅ Don’t compile dependencies
+}
