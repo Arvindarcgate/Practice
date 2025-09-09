@@ -3,6 +3,8 @@
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "target": "esnext",
+    "rootDir": "src",                  // where your .ts files are
+    "outDir": "dist",  
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
