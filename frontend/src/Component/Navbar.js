@@ -23,6 +23,19 @@ const Navbar = () => {
           >
             Product
           </Link>
+
+          <Link
+            to="/login"
+            className="text-white hover:text-yellow-300 transition"
+          >
+            Login
+          </Link>
+          <Link
+            to="/singnup"
+            className="text-white hover:text-yellow-300 transition"
+          >
+            Singnup
+          </Link>
         </div>
       </div>
     </nav>
