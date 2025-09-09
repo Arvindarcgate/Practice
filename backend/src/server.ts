@@ -4,10 +4,12 @@ import cors from "cors";
 import { db } from "./config/db"; // your db.ts file
 import { FormEntry } from "./models/Formentry";
 import { Product } from "./models/Product";
-
+import authRoutes from "./routes/authroutes";
 const app = express();
 app.use(cors());
 app.use(express.json()); // Parse JSON body
+
+app.use("/api/auth", authRoutes);
 
 // ✅ Test DB connection on server start
 // (async () => {

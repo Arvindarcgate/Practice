@@ -1,18 +1,18 @@
 import { Model, RelationMappings } from "objection";
 import Department from "./Department";
-import Role from "./Role"; // ✅ Import Role
+import Role from "./Role";
 
 export default class User extends Model {
   // 🔹 Table columns
   id!: number;
-  username!: string;
-  rollNo!: string;
+  name!: string;
+  email!: string;
+  password!: string;
+
+  // Optional fields
+  rollNo?: string;
   course?: string;
   departmentId?: number;
-
-  name?: string;
-  email?: string;
-  password?: string;
 
   // 🔹 Relations
   department?: Department;
@@ -23,17 +23,18 @@ export default class User extends Model {
   // 🔹 JSON schema validation
   static jsonSchema = {
     type: "object",
-    required: ["username", "rollNo"],
+    required: ["name", "email", "password"], // ✅ only required for auth
 
     properties: {
       id: { type: "integer" },
-      username: { type: "string", minLength: 1, maxLength: 100 },
+      name: { type: "string", minLength: 1, maxLength: 100 },
+      email: { type: "string", format: "email" },
+      password: { type: "string", minLength: 6 },
+
+      // Optional
       rollNo: { type: "string" },
       course: { type: "string" },
       departmentId: { type: "integer" },
-      name: { type: "string" },
-      email: { type: "string", format: "email" },
-      password: { type: "string", format: "password" },
     },
   };
 
@@ -53,7 +54,7 @@ export default class User extends Model {
       join: {
         from: "users.id",
         through: {
-          from: "users_roles.userId", // join table
+          from: "users_roles.userId",
           to: "users_roles.roleId",
         },
         to: "roles.id",

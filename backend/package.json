@@ -6,10 +6,12 @@
   "scripts": {
     "test": "jest --passWithNoTests",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "migrate": "knex --knexfile knexfile.ts --esm migrate:latest",
     "rollback": "knex --knexfile knexfile.ts --esm migrate:rollback",
     "create": "knex migrate:make",
-    "build": "tsc"
+    "build": "tsc",
+    "migrate": "node -r ts-node/register ./node_modules/knex/bin/cli.js --knexfile knexfile.ts migrate:latest",
+    "migrate:rollback": "node -r ts-node/register ./node_modules/knex/bin/cli.js --knexfile knexfile.ts migrate:rollback",
+    "seed": "node -r ts-node/register ./node_modules/knex/bin/cli.js --knexfile knexfile.ts seed:run"
   },
   "keywords": [],
   "author": "",

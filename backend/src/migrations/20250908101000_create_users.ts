@@ -5,6 +5,8 @@ export async function up(knex: Knex): Promise<void> {
   if (!exists) {
     await knex.schema.createTable("users", (table) => {
       table.increments("id").primary(); // auto-increment PK
+
+      // existing fields
       table.string("username", 100).notNullable();
       table.string("rollNo").notNullable();
       table.string("course");
@@ -13,7 +15,15 @@ export async function up(knex: Knex): Promise<void> {
         .unsigned()
         .references("id")
         .inTable("departments")
-        .onDelete("CASCADE"); // if dept deleted, delete users too
+        .onDelete("CASCADE");
+
+      // 🔹 Required for auth
+      table.string("name");
+      table.string("email").notNullable().unique();
+      table.string("password").notNullable();
+
+      // optional: timestamps
+      table.timestamps(true, true);
     });
   }
 }
