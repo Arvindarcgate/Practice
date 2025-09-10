@@ -40,14 +40,6 @@ const Form = () => {
           value={age}
           onChange={(e) => setAge(e.target.value)}
         />
-
-         <input
-          type="number"
-          placeholder="Enter Your height"
-          className="form-input"
-          value={Height}
-          onChange={(e) => setAge(e.target.value)}
-        />
         <button className="form-button">Submit</button>
       </form>
     </div>
