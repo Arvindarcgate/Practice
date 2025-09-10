@@ -2,6 +2,13 @@ import { Model } from "objection";
 import User from "./User";
 
 export default class Department extends Model {
+  // 🔹 Table columns
+  id!: number;
+  name!: string;
+
+  // 🔹 Relations
+  users?: User[];
+
   static tableName = "departments";
 
   // 🔹 Validation rules
@@ -21,7 +28,7 @@ export default class Department extends Model {
       relation: Model.HasManyRelation,
       modelClass: User,
       join: {
-        from: "departments.id", // ⚠️ should be plural "departments.id"
+        from: "departments.id",
         to: "users.departmentId",
       },
     },

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import API from "./Services/api";
+import './Style/auth.css';
 
 
 const Singnup = () => {
   const [formData, setFormData] = useState({
     name: "",
-    username: "",
+
     email: "",
     password: "",
   });
@@ -38,13 +39,13 @@ const Singnup = () => {
             onChange={handleChange}
             required
           />
-          <input
+          {/* <input
             name="username"
             placeholder="Username"
             value={formData.username}
             onChange={handleChange}
             required
-          />
+          /> */}
           <input
             name="email"
             type="email"

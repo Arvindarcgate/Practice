@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import API from "./Services/api";
+import './Style/auth.css';
+
+
   // 👈 Import external CSS
 
 const Login = () => {
