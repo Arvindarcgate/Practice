@@ -3,13 +3,18 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import { db } from "./config/db"; // your db.ts file
 import { FormEntry } from "./models/Formentry";
-import { Product } from "./models/Product";
+import Product from "./models/product";
+import productRoutes from "./routes/productroute";
+import "./db/knex";
+
 import authRoutes from "./routes/authroutes";
 const app = express();
 app.use(cors());
 app.use(express.json()); // Parse JSON body
 
 app.use("/api/auth", authRoutes);
+
+app.use("/api/products", productRoutes);
 
 // ✅ Test DB connection on server start
 // (async () => {
@@ -87,19 +92,19 @@ app.post("/api/form", async (req: Request, res: Response) => {
 //   }
 // });
 
-app.post("/api/products", async (req: Request, res: Response) => {
-  try {
-    const newProduct = await Product.query().insert(req.body);
+// app.post("/api/products", async (req: Request, res: Response) => {
+//   try {
+//     const newProduct = await Product.query().insert(req.body);
 
-    res.status(201).json({
-      message: "Product created successfully",
-      product: newProduct,
-    });
-  } catch (error: any) {
-    console.error("Error inserting product:", error);
-    res.status(500).json({ error: "Server error" });
-  }
-});
+//     res.status(201).json({
+//       message: "Product created successfully",
+//       product: newProduct,
+//     });
+//   } catch (error: any) {
+//     console.error("Error inserting product:", error);
+//     res.status(500).json({ error: "Server error" });
+//   }
+// });
 // app.get("/api/products", async (req: Request, res: Response) => {
 //   try {
 //     console.log("Get API product" , )
@@ -115,23 +120,23 @@ app.post("/api/products", async (req: Request, res: Response) => {
 //   }
 // });
 
-app.get("/api/products", async (req: Request, res: Response) => {
-  try {
-    console.log("✅ /api/products hit"); // confirm API is called
+// app.get("/api/products", async (req: Request, res: Response) => {
+//   try {
+//     console.log("✅ /api/products hit"); // confirm API is called
 
-    const products = await Product.query();
+//     const products = await Product.query();
 
-    console.log("📦 Products from DB:", products); // log fetched products
+//     console.log("📦 Products from DB:", products); // log fetched products
 
-    res.status(200).json({
-      message: "Products fetched successfully",
-      products,
-    });
-  } catch (error: any) {
-    console.error("❌ Error fetching products:", error);
-    res.status(500).json({ error: "Server error" });
-  }
-});
+//     res.status(200).json({
+//       message: "Products fetched successfully",
+//       products,
+//     });
+//   } catch (error: any) {
+//     console.error("❌ Error fetching products:", error);
+//     res.status(500).json({ error: "Server error" });
+//   }
+// });
 
 // Start server
 const PORT = process.env.PORT || 5000;
