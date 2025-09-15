@@ -1,14 +1,28 @@
-
-// src/pages/Product.tsx
 import React, { useState } from "react";
+import axios from "axios";
 
 const Product: React.FC = () => {
   const [shopName, setShopName] = useState("");
   const [productDetails, setProductDetails] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Shop: ${shopName}\nProduct: ${productDetails}`);
+    try {
+      const res = await axios.post("http://localhost:5000/api/products", {
+        shopName,
+        productDetails,
+      });
+
+      alert("Product submitted successfully!");
+      console.log("Response:", res.data);
+
+      // clear fields
+      setShopName("");
+      setProductDetails("");
+    } catch (error) {
+      console.error("Error submitting product:", error);
+      alert("Failed to submit product");
+    }
   };
 
   return (
