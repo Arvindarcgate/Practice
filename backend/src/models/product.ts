@@ -1,14 +1,9 @@
-// backend/src/models/Product.ts
 import { Model } from "objection";
+import knex from "../db/knex"; // your configured Knex instance
 
-class Product extends Model {
-  id!: number;
-  shopName!: string;
-  productDetails!: string;
-
-  static get tableName() {
-    return "products"; // 🔑 match your migration table name
-  }
+export default class Product extends Model {
+  static tableName = "products";
 }
 
-export default Product;
+// Bind the model to Knex
+Product.knex(knex);

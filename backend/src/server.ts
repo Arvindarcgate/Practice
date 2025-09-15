@@ -138,8 +138,13 @@ app.post("/api/form", async (req: Request, res: Response) => {
 //   }
 // });
 
-// Start server
+// Start server only if not in test mode
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-});
+
+if (process.env.NODE_ENV !== "test") {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
+  });
+}
+
+export default app; // 👈 add this line
